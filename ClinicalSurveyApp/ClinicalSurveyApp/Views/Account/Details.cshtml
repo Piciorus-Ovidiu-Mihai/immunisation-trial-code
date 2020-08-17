@@ -1,0 +1,62 @@
+﻿@model ClinicalSurveyApp.ViewModel.UserDetailsViewModel
+
+@{
+    ViewData["Title"] = "UserDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>User Details</h1>
+
+
+@using (Html.BeginForm("Details", "Account", FormMethod.Post))
+{
+    @Html.HiddenFor(mode => Model.Id);
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.UserName)
+            @Html.EditorFor(model => model.UserName)
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.Email)
+            @Html.EditorFor(model => model.Email)
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.EditorFor(model => model.FirstName)
+        </div>
+
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.LastName)
+            @Html.EditorFor(model => model.LastName)
+        </div>
+
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.EditorFor(model => model.PhoneNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="ChangePassword" class="btn btn-primary" />
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

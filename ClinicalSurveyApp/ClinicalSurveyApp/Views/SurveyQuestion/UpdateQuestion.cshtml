@@ -1,0 +1,83 @@
+﻿@model ClinicalSurveyApp.ViewModel.SurveyQuestionViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h2>Edit Question</h2>
+
+@using (Html.BeginForm("UpdateQuestion", "SurveyQuestion"))
+{
+
+    <p>
+        <input type="submit" value="Save"/>
+    </p>
+
+    @Html.HiddenFor(model => model.SurveyId)
+    @Html.HiddenFor(model => model.SurveyQuestionId)
+
+    <div class="editor-field">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                @*@Html.DisplayNameFor(model => model.SurveyQuestionText)*@
+                @Html.EditorFor(model => model.SurveyQuestionText, new { htmlAttributes = new { style = "width: 500px" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-field">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                @Html.DisplayNameFor(model => model.Type)
+                @Html.DropDownListFor(model => model.Type, new[] {
+                      new SelectListItem() {Text = "textbox", Value = "textbox"},
+                      new SelectListItem() {Text = "checkbox", Value = "checkbox"},
+                      new SelectListItem() {Text = "radiobox", Value = "radiobox"},
+
+                  }, "Choose an option")
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-field">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                @Html.DisplayNameFor(model => model.IsMandatory)
+                @Html.EditorFor(model => model.IsMandatory)
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @for (int i = 0; i < Model.SurveyPossibleAnswersList.Count; i++)
+        {
+
+            <div class="editor-field">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" required value="">
+                        @Html.HiddenFor(model => model.SurveyPossibleAnswersList[i].SurveyPossibleAnswerId)
+                        @Html.EditorFor(item => Model.SurveyPossibleAnswersList[i].SurveyPossibleAnswerText, new { htmlAttributes = new { style = "width: 500px" } })
+                        @Html.ActionLink("Delete", "DeleteAnswer", "SurveyPossibleAnswer",
+                            new { id = Model.SurveyPossibleAnswersList[i].SurveyPossibleAnswerId },
+                            null)
+
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+}
+
+@using (Html.BeginForm("AddNewAnswer", "SurveyQuestion", new { id = Model.SurveyQuestionId }, FormMethod.Post))
+{
+    {
+        <input type="submit" value="+" />
+    }
+}
+
+

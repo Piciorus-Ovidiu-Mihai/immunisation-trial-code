@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ClinicalSurveyApp.ViewModel.UserSurveyResponseViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Survey.SurveyName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.User.LastName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CompletedOnDate)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Survey.SurveyName)
+                </td>
+
+                @if (item.User == null)
+                {
+                    <td>
+                        <p>Anonymous</p>
+                    </td>
+
+                    <td>
+                        <p>User</p>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletedOnDate)
+                </td>
+
+                <td>
+                    @Html.ActionLink("View Result", "ShowResponseForUser", "UserSurveyResponse", new { id = item.UserSurveyResponseId })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

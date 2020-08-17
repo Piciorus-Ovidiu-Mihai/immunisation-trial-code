@@ -1,0 +1,66 @@
+﻿    @model ClinicalSurveyApp.ViewModel.SurveyViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<hr />
+
+
+@using (Html.BeginForm("EditSurveyDetails", "Survey", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.SurveyId)
+
+    <div>
+         <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.SurveyName)
+            @Html.EditorFor(model => model.SurveyName)
+         </div>
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.SurveyDescription)
+            @Html.EditorFor(model => model.SurveyDescription)
+        </div>
+       
+    </div>
+
+    @Html.HiddenFor(model => model.DateCreated)
+    @Html.HiddenFor(model => model.SurveyOwner)
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.AvailableFromDate)
+            @Html.EditorFor(model => model.AvailableFromDate)
+        </div>
+   
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3" required value="">
+            @Html.DisplayNameFor(model => model.ClosesOnDate)
+            @Html.EditorFor(model => model.ClosesOnDate)
+        </div>
+   
+    </div>
+
+    @Html.HiddenFor(model => model.ModifiedByUser)
+
+    @Html.HiddenFor(model => Model.QuestionsList)
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    }
+
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -1,0 +1,82 @@
+﻿@model ClinicalSurveyApp.ViewModel.UserSurveyResponseViewModel
+
+@{
+    ViewData["Title"] = "Survey Response";
+}
+<style>
+    .div-1 {
+        background-color: #FBD603;
+    }
+</style>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Survey.SurveyName)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Survey.SurveyDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Survey.SurveyDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompletedOnDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompletedOnDate)
+        </dd>
+    </dl>
+</div>
+
+<ul class="list-group list-group-flush">
+
+    @foreach (var UserQuestionAnswer in Model.UserQuestionAnswersList)
+    {
+        <li class="list-group-item">
+
+            @Html.DisplayFor(m => UserQuestionAnswer.SurveyQuestion.SurveyQuestionText)
+
+            @foreach (var possibleAnswer in UserQuestionAnswer.SurveyQuestion.SurveyPossibleAnswersList)
+            {
+
+                @if (UserQuestionAnswer.SurveyQuestion.Type.CompareTo("radiobox") == 0)
+                {
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => possibleAnswer.SurveyPossibleAnswerText, false)
+                        @Html.DisplayFor(m => possibleAnswer.SurveyPossibleAnswerText)
+                    </div>
+                }
+                else if (UserQuestionAnswer.SurveyQuestion.Type.CompareTo("checkbox") == 0)
+                {
+                    <div class="form-check">
+                        @Html.DisplayFor(m => possibleAnswer.Checked)
+                        @Html.DisplayFor(m => possibleAnswer.SurveyPossibleAnswerText)
+                    </div>
+                }
+                else if (UserQuestionAnswer.SurveyQuestion.Type.CompareTo("textbox") == 0)
+                {
+
+                }
+            }
+
+            <div class="div-1">
+                @foreach (var UserAnswers in UserQuestionAnswer.UserQuestionResponse)
+                {
+
+                    @if (UserQuestionAnswer.SurveyQuestion.Type.CompareTo("textbox") == 0)
+                    {
+                        @Html.DisplayFor(m => UserAnswers.UserInput);
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(m => UserAnswers.SurveyPossibleAnswer.SurveyPossibleAnswerText)
+                    }
+
+                }
+            </div>
+
+        </li>
+    }
+
+</ul>
+

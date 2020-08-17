@@ -1,0 +1,63 @@
+﻿@model ClinicalSurveyApp.ViewModel.SurveyViewModel
+
+
+@{
+    ViewData["Title"] = "Create survey";
+}
+
+<h1>Edit survey questions</h1>
+<hr />
+
+@using (Html.BeginForm("CreateQuestion", "Survey", FormMethod.Get))
+{
+    <div class="form-group fieldGroup">
+        <div class="input-group">
+
+            @foreach (var item in Model.QuestionsList)
+            {
+                <div class="input-group">
+
+                    @Html.HiddenFor(modelitem => item.SurveyQuestionId)
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            @Html.DisplayNameFor(modelitem => item.SurveyQuestionText)
+                            @Html.TextBoxFor(modelitem => item.SurveyQuestionText, new { @readonly = true, style = "width:400px;" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            @Html.DisplayNameFor(modelitem => item.Type)
+                            @Html.TextBoxFor(modelitem => item.Type, new { @readonly = true })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            @Html.DisplayNameFor(modelitem => item.IsMandatory)
+                            @Html.DisplayFor(modelitem => item.IsMandatory)
+                        </div>
+                    </div>
+
+                    <div class="text-lg-right">
+                        @Html.ActionLink("Edit", "UpdateQuestion", "SurveyQuestion", new { id = item.SurveyQuestionId }, null) |
+                        @Html.ActionLink("Delete", "DeleteQuestion", "SurveyQuestion", new { id = item.SurveyQuestionId }, null)
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("AddEmptyQuestion", "Survey", new { id = Model.SurveyId }, FormMethod.Post))
+{
+    <input type="submit" value="+" />
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

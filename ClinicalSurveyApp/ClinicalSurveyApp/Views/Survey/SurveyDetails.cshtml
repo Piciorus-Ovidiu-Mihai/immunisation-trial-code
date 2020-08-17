@@ -1,0 +1,91 @@
+﻿@model ClinicalSurveyApp.ViewModel.SurveyViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+    <h1>Details</h1>
+
+    <div>
+        <h4>@Html.DisplayFor(model => model.SurveyName)</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SurveyDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SurveyDescription)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateCreated)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AvailableFromDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AvailableFromDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ClosesOnDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ClosesOnDate)
+            </dd>
+        </dl>
+    </div>
+
+
+    <ul class="list-group">
+        @foreach (var question in Model.QuestionsList)
+        {
+
+            <li class="list-group-item">
+                @Html.DisplayFor(questionItem => question.SurveyQuestionText)
+                @foreach (var answer in question.SurveyPossibleAnswersList)
+                {
+                    @if (question.Type.CompareTo("radiobox") == 0)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
+                            <label class="form-check-label" for="exampleRadios1">
+                                @Html.DisplayFor(answerItem => answer.SurveyPossibleAnswerText)
+                            </label>
+                        </div>
+                    }
+                    else if (question.Type.CompareTo("checkbox") == 0)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                @Html.DisplayFor(answerItem => answer.SurveyPossibleAnswerText)
+                            </label>
+                        </div>
+                    }
+                    else if (question.Type.CompareTo("textbox") == 0)
+                    {
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your Answer Here">
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div>
+                            @Html.DisplayFor(answerItem => answer.SurveyPossibleAnswerText)
+                        </div>
+                    }
+                }
+
+
+            </li>
+
+
+        }
+    </ul>
+    <div>
+        @Html.ActionLink("Edit", "EditSurveyDetails", new { id = Model.SurveyId }) |
+        <a asp-action="Index">Back to List</a>
+    </div>

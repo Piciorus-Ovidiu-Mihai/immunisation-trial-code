@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ClinicalSurveyApp.ViewModel.SurveyViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<p>
+    <a asp-action="CreateSurvey">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyDescription)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyDescription)
+                </td>
+                <td>
+                    @Html.FormatValue("dd-MM-yyy", item.DateCreated.ToString("dd-MM-yyy"))
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditSurveyDetails", new { id = item.SurveyId }) |
+                    @Html.ActionLink("Details", "SurveyDetails", new { id = item.SurveyId }) |
+                    @Html.ActionLink("Edit questions", "CreateQuestion", new { id = item.SurveyId }) |
+                    @Html.ActionLink("Delete", "DeleteSurvey", new { id = item.SurveyId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

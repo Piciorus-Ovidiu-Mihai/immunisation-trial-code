@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ClinicalSurveyApp.ViewModel.SurveyQuestionViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyQuestionText)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsMandatory)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyQuestionText)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsMandatory)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "EditSurveyDetails", new { id = item.SurveyId }) |
+                    @Html.ActionLink("Details", "SurveyDetails", new { id = item.SurveyId }) |
+                    @Html.ActionLink("Add questions", "CreateQuestion", new { id = item.SurveyId }) |
+                    @using (Html.BeginForm("DeleteSurvey", "Survey", new { id = item.SurveyId }, FormMethod.Post))
+                    {
+                        <input type="submit" value="Delete" />
+                    }*@
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model ClinicalSurveyApp.ViewModel.ViewSingleUserViewModel
+
+@{
+    ViewData["Title"] = "Manage users";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+
+<div class="card-deck text-align: center">
+
+    <div class="card-header text-center">
+        <h4>Id          : @Model.Id</h4>
+        <h4>Email       : @Model.Email</h4>
+        <h4>Fullname    : @Model.FirstName @Model.LastName </h4>
+        <h4>PhoneNumber : @Model.PhoneNumber</h4>
+    </div>
+    <div class="card-footer text-center">
+        <a asp-action="index" asp-controller="ManageUsers"
+           class="btn btn-primary m-1">Back</a>
+
+        <a asp-action="edit" asp-controller="ManageUsers"
+           asp-route-id="@Model.Id"
+           class="btn btn-primary m-1">Edit</a>
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model ClinicalSurveyApp.ViewModel.UserSurveyResponseViewModel
+
+@{
+    ViewData["Title"] = "Complete survey";
+}
+
+<h1>@Html.DisplayFor(model => model.Survey.SurveyName)</h1>
+<h4>@Html.DisplayFor(model => model.Survey.SurveyDescription)</h4>
+
+@*@foreach (var question in Model.Survey.QuestionsList)
+{
+    @Html.DisplayFor(questionItem => question.SurveyQuestionText)
+
+    @foreach (var answer in question.SurveyPossibleAnswersList)
+    {
+        @Html.DisplayFor(answerItem => answer.SurveyPossibleAnswerText)
+    }
+}*@
+
+@for (int i = 0; i < Model.Survey.QuestionsList.Count; i++)
+{
+    <div>
+        @Html.HiddenFor(m => Model.Survey.QuestionsList[i].SurveyQuestionId)
+        @Html.DisplayFor(m => Model.Survey.QuestionsList[i].SurveyQuestionText)
+        @Html.HiddenFor(m => Model.Survey.QuestionsList[i].Type)
+    </div>
+    @for (int j = 0; j < Model.Survey.QuestionsList[i].SurveyPossibleAnswersList.Count; j++)
+    {
+        @if (Model.Survey.QuestionsList[i].Type.CompareTo("checkbox") == 0)
+        {
+            <table>
+                <tr>
+                    <td>
+                        @Html.HiddenFor(m => Model.UserQuestionAnswersList[i].UserQuestionResponse[j].SurveyPossibleAnswerId)
+                        @Html.CheckBoxFor(m => Model.UserQuestionAnswersList[i].UserQuestionResponse[j].Checked)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => Model.Survey.QuestionsList[i].SurveyPossibleAnswersList[j])
+                    </td>
+                </tr>
+            </table>
+        }
+        else if (Model.Survey.QuestionsList[i].Type.CompareTo("radiobox") == 0)
+        {
+            <div>
+                @Html.RadioButtonFor(m => Model.UserQuestionAnswersList[i].UserQuestionResponse[j].SelectedAnswer, Model.Survey.QuestionsList[i].SurveyPossibleAnswersList[j].SurveyPossibleAnswerText)
+            </div>
+        }
+        else if (Model.Survey.QuestionsList[i].Type.CompareTo("textbox") == 0)
+        {
+            <div>
+                @Html.EditorFor(m => Model.UserQuestionAnswersList[i].UserQuestionResponse[j].UserInput)
+            </div>
+        }
+    }
+}

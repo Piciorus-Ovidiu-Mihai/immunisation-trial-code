@@ -1,0 +1,58 @@
+﻿@model ClinicalSurveyApp.ViewModel.SurveyViewModel
+
+
+@{
+    ViewData["Title"] = "Create survey";
+}
+
+<h1>Create a new survey</h1>
+<hr />
+
+
+@using (Html.BeginForm("CreateSurvey", "Survey", FormMethod.Post))
+{
+    <div>
+        <div class="col-md-6 mb-3">
+            @Html.DisplayNameFor(model => model.SurveyName)
+            @Html.EditorFor(model => model.SurveyName, new { htmlAttributes = new { style = "width: 500px" } })
+        </div>
+        
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3">
+            @Html.DisplayNameFor(model => model.SurveyDescription)
+            @Html.EditorFor(model => model.SurveyDescription, new { htmlAttributes = new { style = "width: 500px" } })
+        </div>
+        
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3">
+            @Html.DisplayNameFor(model => model.AvailableFromDate)
+            @Html.EditorFor(model => model.AvailableFromDate, new { htmlAttributes = new { style = "width: 500px" } })
+        </div>
+       
+    </div>
+
+    <div>
+        <div class="col-md-6 mb-3">
+            @Html.DisplayNameFor(model => model.ClosesOnDate)
+            @Html.EditorFor(model => model.ClosesOnDate, new { htmlAttributes = new { style = "width: 500px" } })
+        </div>
+      
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+}
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

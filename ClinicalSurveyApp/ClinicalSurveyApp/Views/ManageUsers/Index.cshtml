@@ -1,0 +1,21 @@
+﻿@model ClinicalSurveyApp.ViewModel.ManageUsersViewModel
+
+@{
+    ViewData["Title"] = "Manage users";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+    <div class="card-deck text-align: center">
+        @foreach (var user in Model.Everyone)
+        {
+                <div class="card-body text-align: center">
+                    <h3> @user.Email</h3>
+                </div>
+                <div class="card-body text-center" > 
+                    <a asp-action="details" asp-controller="ManageUsers" 
+                       class="btn btn-primary m-1">View</a>
+                </div> 
+         }
+
+    </div>

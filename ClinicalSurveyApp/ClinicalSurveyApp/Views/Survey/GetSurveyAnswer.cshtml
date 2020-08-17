@@ -1,0 +1,85 @@
+﻿@model ClinicalSurveyApp.ViewModel.SurveyViewModel
+
+@{
+    ViewData["Title"] = Model.SurveyName;
+}
+
+<h1>@Html.DisplayFor(model => model.SurveyName)</h1>
+<h4>@Html.DisplayFor(model => model.SurveyDescription)</h4>
+
+@using (Html.BeginForm("SaveSurveyAnswer", "Survey", FormMethod.Post, new { @id = "myForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => Model.SurveyId)
+    @Html.HiddenFor(m => Model.SurveyName)
+    @Html.HiddenFor(m => Model.SurveyOwnerId)
+    @Html.HiddenFor(m => Model.SurveyDescription)
+    @Html.HiddenFor(m => Model.ModifiedByUser)
+    @Html.HiddenFor(m => Model.AvailableFromDate)
+    @Html.HiddenFor(m => Model.ClosesOnDate)
+    @Html.HiddenFor(m => Model.DateCreated)
+    @Html.HiddenFor(m => Model.AvailableFromDate)
+
+    <ul class="list-group list-group-flush">
+
+        @for (int i = 0; i < Model.QuestionsList.Count(); i++)
+        {
+
+            @Html.HiddenFor(m => Model.QuestionsList[i].SurveyQuestionId)
+            @Html.HiddenFor(m => Model.QuestionsList[i].IsMandatory)
+            @Html.HiddenFor(m => Model.QuestionsList[i].SurveyId)
+            @Html.HiddenFor(m => Model.QuestionsList[i].Type)
+            @Html.HiddenFor(m => Model.QuestionsList[i].SurveyQuestionText)
+
+            <li class="list-group-item">
+                @if (Model.QuestionsList[i].IsMandatory == true)
+                {
+                    <p> @Html.DisplayFor(m => Model.QuestionsList[i].SurveyQuestionText)* </p>
+                }
+                else
+                {
+                    @Html.DisplayFor(m => Model.QuestionsList[i].SurveyQuestionText)
+                }
+
+                @for (int j = 0; j < Model.QuestionsList[i].SurveyPossibleAnswersList.Count; j++)
+                {
+                    @Html.HiddenFor(m => Model.QuestionsList[i].SurveyPossibleAnswersList[j].SurveyPossibleAnswerText);
+                    @Html.HiddenFor(m => Model.QuestionsList[i].SurveyPossibleAnswersList[j].SurveyPossibleAnswerId);
+                    @Html.HiddenFor(m => Model.QuestionsList[i].SurveyQuestionId);
+
+
+                    @if (Model.QuestionsList[i].Type.CompareTo("radiobox") == 0)
+                    {
+                        <div class="form-check">
+                            @Html.RadioButtonFor(answerItem => Model.QuestionsList[i].SelectedAnswer, Model.QuestionsList[i].SurveyPossibleAnswersList[j].SurveyPossibleAnswerText)
+                            @Html.DisplayFor(answerItem => Model.QuestionsList[i].SurveyPossibleAnswersList[j].SurveyPossibleAnswerText)
+                        </div>
+                    }
+                    else if (Model.QuestionsList[i].Type.CompareTo("checkbox") == 0)
+                    {
+                        <div class="form-check">
+                            @Html.EditorFor(item => Model.QuestionsList[i].SurveyPossibleAnswersList[j].Checked)
+                            @Html.DisplayFor(answerItem => Model.QuestionsList[i].SurveyPossibleAnswersList[j].SurveyPossibleAnswerText)
+                        </div>
+                    }
+                    else if (Model.QuestionsList[i].Type.CompareTo("textbox") == 0)
+                    {
+                        <div class="input-group mb-3">
+                            @Html.TextAreaFor(item => Model.QuestionsList[i].SelectedAnswer, new { @class = "form-control form-control-full", rows = 2 })
+                        </div>
+                    }
+
+                }
+
+
+            </li>
+        }
+    </ul>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-dark" style="float: right;" />
+    </div>
+}

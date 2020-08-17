@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ClinicalSurveyApp.ViewModel.UserSurveyResponseViewModel>
+
+@{
+    ViewData["Title"] = "Your Surveys";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Survey.SurveyName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Survey.SurveyDescription)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CompletedOnDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Survey.SurveyName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Survey.SurveyDescription)
+                </td>
+
+                <td>
+                    @Html.FormatValue("dd-MM-yyy", item.CompletedOnDate.ToString("dd-MM-yyy"))
+                </td>
+                <td>
+                    @Html.ActionLink("View Result", "ShowResponse", "UserSurveyResponse", new { id = item.SurveyId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

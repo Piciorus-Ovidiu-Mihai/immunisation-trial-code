@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ClinicalSurveyApp.ViewModel.SurveyViewModel>
+
+@{
+    ViewData["Title"] = "Take Survey";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyDescription)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ClosesOnDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyDescription)
+                </td>
+
+                <td>
+                    @Html.FormatValue("dd-MM-yyy", item.ClosesOnDate.ToString("dd-MM-yyy"))
+                </td>
+                <td>
+                    @Html.ActionLink("Take Survey", "GetSurveyAnswer", new { idGuid = item.GuidLink })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
