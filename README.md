@@ -4,7 +4,7 @@ During .NET Full-Stack student program, together with other colleagues, we built
 ## 🛠️ Architecture
 
 <p align="center">
-  <img src="https://github.com/Piciorus-Ovidiu-Mihai/Photos/blob/master/pg-clean-architecture.png">
+  <img src="https://github.com/Piciorus-Ovidiu-Mihai/Immunisation-Trial-Code/blob/master/immunisation-trial-architecture.png">
 </p>
 
 ## 📷 Preview  
