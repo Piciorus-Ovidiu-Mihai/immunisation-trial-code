@@ -2,17 +2,30 @@
 During .NET Full-Stack student program, together with other colleagues, we built an application for creating, completing, updating some surveys about medical diseases.
 
 ## 🛠️ Architecture
+This .NET Core project follows a layered architecture pattern, which is a common approach to structuring applications. In this architecture, the code is organized into different layers, each with a specific role and responsibility. Here's a breakdown of the layers and their purpose:
+* Controllers: This layer typically contains the application's entry points and is responsible for handling HTTP requests and managing the flow of the application.
+* DAL (Data Access Layer): This layer is responsible for interacting with the application's data sources, such as databases. It contains code for querying, updating, and generally managing the data.
+* Data: It can contain data models, view models, and other data-related structures. It often acts as a bridge between the database and the application logic, providing data transfer objects (DTOs) and entities that can be used in the business logic.
 
 <p align="center">
   <img src="https://github.com/Piciorus-Ovidiu-Mihai/Immunisation-Trial-Code/blob/master/immunisation-trial-architecture.png">
 </p>
 
+* Properties: This package include configuration files, settings, and resources needed by the application. This layer ensures that the application can be configured and customized without modifying the core code.
+* Services: This layer contains the core business logic of the application. It includes service classes that handle various operations, such as user authentication, data processing, and more.
+* Library Project for Entities: This Class Library contains the entity classes or models that represent the data structures in your application. These entities are used in the DAL for database operations and in the Data layer to transfer data.
+* Separate Email Service: This is a dedicated component for sending emails. This separation promotes code reusability and simplifies the management of email-related tasks.
+
 ## 📷 Preview  
-Some photos about the application, if there are some exiting visual representation and a short description about each feature
+In this section, there are provided some visual previews of key pages and features within our application. Get a glimpse of the following:
+
+Dashboard Page where can be explored this user-friendly dashboard, where you can access vital information at a glance and manage your data efficiently.
 
 <p align="center">
   <img src="https://github.com/Piciorus-Ovidiu-Mihai/Photos/blob/master/home.PNG">
 </p>
+
+Create Survey Page where the survet are created using an intuitive interface. Customize surveys to based on needs effortlessly.
 
 <p align="center">
   <img src="https://github.com/Piciorus-Ovidiu-Mihai/Photos/blob/master/savesurvey.PNG">
@@ -22,17 +35,21 @@ Some photos about the application, if there are some exiting visual representati
  <img src="https://github.com/Piciorus-Ovidiu-Mihai/Photos/blob/master/statistics.PNG">
 </p>
 
+Manage Users and Roles Page represent the user management tools and role assignment options, ensuring that the application remains secure and organized.
+
 <p align="center">
   <img src="https://github.com/Piciorus-Ovidiu-Mihai/Photos/blob/master/adminapge.PNG">
 </p>
 
+These previews offer a sneak peek into the user interface and functionality, giving you a quick overview of what our application has to offer.
+
 ## 🛡️ Key Features
-* Efficiency: Save time and valuable resources by eliminating the need to build everything from scratch, allowing developers to focus on the unique aspects of their application.
-* Customization: Easily customize projects based on specific requirements, such as selecting desired navigation menus, integrating reusable components, and implementing authentication modules.
-* Flexibility: Adapt to the ever-evolving industry requirements with the flexibility and ease of use offered by this solution.
-* High-Quality Code: The project promotes robust coding standards and design patterns, fostering scalability and maintainability while adhering to industry best practices.
-* Collaboration: Standardized coding styles, naming conventions, and architectural models enhance code readability and facilitate collaboration within development teams.
-* Future-Ready: Create web applications that are not only visually appealing but also robust and adaptable to future needs.
+* Modularity: The layered architecture promotes modularity and separation of concerns, making it easier to manage and maintain your codebase.
+* Scalability: It allows for easier scaling of the application as different layers can be extended or enhanced independently.
+* Testability: The separation of concerns in different layers makes it easier to write unit tests for your code.
+* Code Reusability: Components like the email service can be reused in other parts of your application or in future projects.
+* Clear Structure: A layered architecture provides a clear and organized structure for your project, making it easier for developers to collaborate and understand the codebase.
+* Flexibility: With different layers, it adapt and extend the application as requirements change.
 
 ## 💽 Prerequisites
 * ⭐ Visual Studio
